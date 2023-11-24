@@ -1,18 +1,20 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const AWS = require('aws-sdk');
 const fs = require('fs');
 
 // Configuration AWS
 AWS.config.update({
-  accessKeyId: 'VOTRE_ACCESS_KEY_ID',
-  secretAccessKey: 'VOTRE_SECRET_ACCESS_KEY',
-  region: 'VOTRE_REGION_AWS',
+  accessKeyId: process.env.ACCES_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCES_KEY_ID,
+  region: 'eu-north-1',
 });
 
 // Création d'une instance S3
 const s3 = new AWS.S3();
 
 // Spécifiez le chemin du fichier que vous souhaitez télécharger
-const filePath = 'chemin/vers/votre/fichier.txt';
+const filePath = 'C:/Users/matth/Downloads/in-the-forest-2-21402.mp3';
 
 // Spécifiez le nom de votre bucket S3
 const bucketName = 'spotify98';
@@ -22,7 +24,7 @@ const fileStream = fs.createReadStream(filePath);
 
 // Paramètres pour l'upload
 const uploadParams = {
-  Bucket: spotify98,
+  Bucket: bucketName,
   Key: 'nom-du-fichier-sur-s3.txt', // Nom du fichier sur S3
   Body: fileStream,
 };
