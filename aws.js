@@ -1,42 +1,37 @@
-//veiller à remplacer le nom du bucket 
-
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const dotenv = require('dotenv');
-dotenv.config();
-// require('dotenv').config();
 
+// Configuration AWS
 AWS.config.update({
-    accessKeyId: process.env.accessKeyId,
-    secretAccessKey: process.env.secretAccessKey,
-    region: 'eu-north-1',
+  accessKeyId: 'VOTRE_ACCESS_KEY_ID',
+  secretAccessKey: 'VOTRE_SECRET_ACCESS_KEY',
+  region: 'VOTRE_REGION_AWS',
 });
 
+// Création d'une instance S3
 const s3 = new AWS.S3();
 
-const uploadAWSMiddleware = (req, res) => {
-    // console.log(process.env.accessKeyId)
-    // console.log(process.env.secretAccessKey)
+// Spécifiez le chemin du fichier que vous souhaitez télécharger
+const filePath = 'chemin/vers/votre/fichier.txt';
 
-    const { title } = req.body; // Assuming title is a unique identifier for the file
-    const fileName = "totre";
+// Spécifiez le nom de votre bucket S3
+const bucketName = 'spotify98';
 
-    const uploadParams = {
-        Bucket: 'spotify92',
-        Key: "fileName",
-        Body: fs.createReadStream('C:/Users/killi/Downloads/in-the-forest-2-21402.mp3'),
+// Lire le fichier en tant que flux
+const fileStream = fs.createReadStream(filePath);
 
-    };
-
-    // console.log('uploadParams', uploadParams)²
-
-    s3.upload(uploadParams, (err, data) => {
-        if (err) {
-            console.error('Error uploading to S3:', err);
-            res.status(500).json({ message: 'Error uploading to S3' });
-        }
-        console.log(accessKeyId);
-    });
+// Paramètres pour l'upload
+const uploadParams = {
+  Bucket: spotify98,
+  Key: 'nom-du-fichier-sur-s3.txt', // Nom du fichier sur S3
+  Body: fileStream,
 };
 
-module.exports = uploadAWSMiddleware;
+// Upload du fichier sur S3
+s3.upload(uploadParams, (err, data) => {
+  if (err) {
+    console.error("Erreur lors de l'upload :", err);
+  } else {
+    console.log('Fichier uploadé avec succès. URL S3 :', data.Location);
+  }
+});
