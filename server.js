@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const musicRoutes = require('./src/routes/musicRoutes');
 const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
@@ -10,6 +11,16 @@ AWS.config.update({
   accessKeyId: process.env.ACCES_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCES_KEY_ID,
   region: 'us-east-1'
+});
+
+// Remplacez l'URL par votre chaîne de connexion MongoDB Atlas
+mongoose.connect('mongodb+srv://Spotify:Test123@cluster0.rkz3hy4.mongodb.net/', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connexion à MongoDB réussie');
+}).catch(err => {
+  console.error('Erreur de connexion à MongoDB:', err);
 });
 
 const app = express();

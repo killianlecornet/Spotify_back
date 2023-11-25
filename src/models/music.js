@@ -1,10 +1,9 @@
-class Music {
-  constructor(title, artist) {
-      this.title = title;
-      this.artist = artist;
-  }
+const mongoose = require('mongoose');
 
-  // Ajoutez d'autres méthodes pour gérer la musique ici
-}
+const musicSchema = new mongoose.Schema({
+    title: String,
+    artist: String,
+    url: String // Champ pour l'URL de l'objet
+});
 
-module.exports = Music;
+module.exports = mongoose.model('Music', musicSchema);
