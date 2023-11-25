@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const musicSchema = new mongoose.Schema({
     title: String,
     artist: String,
-    url: String // Champ pour l'URL de l'objet
+    genre: String, // Nouveau champ pour le genre
+    url: String
 });
 
 module.exports = mongoose.model('Music', musicSchema);

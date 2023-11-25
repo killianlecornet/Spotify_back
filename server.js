@@ -14,7 +14,7 @@ AWS.config.update({
 });
 
 // Remplacez l'URL par votre chaîne de connexion MongoDB Atlas
-mongoose.connect('mongodb+srv://Spotify:Test123@cluster0.rkz3hy4.mongodb.net/', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {

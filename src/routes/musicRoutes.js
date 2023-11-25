@@ -12,6 +12,7 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/upload', upload.single('file'), async (req, res) => {
+    const { title, artist, genre } = req.body; // Récupération des données du formulaire
     const file = req.file;
     const fileStream = fs.createReadStream(file.path);
 
@@ -29,13 +30,14 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
         try {
             const newMusic = new Music({
-                title: req.file.originalname, // Vous pouvez ajuster ces champs selon vos besoins
-                artist: 'Artiste Inconnu', // Par exemple, en les extrayant de 'req.body' si nécessaire
-                url: data.Location
+                title,  // Titre de la musique
+                artist, // Nom de l'artiste
+                genre,  // Genre de la musique
+                url: data.Location // URL du fichier sur S3
             });
 
             await newMusic.save();
-            res.send('Fichier uploadé et enregistré avec succès: ' + data.Location);
+            res.send('Fichier uploadé et enregistré avec succès : ' + data.Location);
         } catch (error) {
             res.status(500).send(error.message);
         }
