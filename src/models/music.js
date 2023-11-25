@@ -1,15 +1,10 @@
-const mongoose = require('mongoose');
+class Music {
+  constructor(title, artist) {
+      this.title = title;
+      this.artist = artist;
+  }
 
-// Modèle de données pour une musique
-const musicSchema = new mongoose.Schema({
-  title: String,
-  artist: String,
-  album: String,
-  year: Number,
-  genre: String,
-  duration: String,
-  filePath: String,
-  fileName: String,
-});
+  // Ajoutez d'autres méthodes pour gérer la musique ici
+}
 
-module.exports = mongoose.model('Music', musicSchema);
+module.exports = Music;
