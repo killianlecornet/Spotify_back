@@ -10,7 +10,7 @@ dotenv.config();
 AWS.config.update({
   accessKeyId: process.env.ACCES_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCES_KEY_ID,
-  region: 'us-east-1'
+  region: 'eu-north-1'
 });
 
 // Remplacez l'URL par votre chaîne de connexion MongoDB Atlas
