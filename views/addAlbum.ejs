@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un album</title>
+</head>
+<body>
+    <h1>Ajouter un nouvel album</h1>
+    <form action="/album/upload" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Titre de l'album" required>
+        <input type="text" name="artist" placeholder="Nom de l'artiste" required>
+        <input type="date" name="releaseDate" required>
+        <input type="file" name="image" required> <!-- Image de l'album -->
+        <textarea name="description" placeholder="Description de l'album" required></textarea>
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+</html>
