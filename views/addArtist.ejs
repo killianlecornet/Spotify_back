@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un artiste</title>
+</head>
+<body>
+    <h1>Ajouter un nouvel artiste</h1>
+    <form action="/artist/upload" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Nom de l'artiste" required>
+        <textarea name="description" placeholder="Description de l'artiste" required></textarea>
+        <input type="file" name="image" required> <!-- Image -->
+        <button type="submit">Uploader</button>
+    </form>
+</body>
+</html>

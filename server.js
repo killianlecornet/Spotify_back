@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const musicRoutes = require('./src/routes/musicRoutes');
+const artistRoutes = require('./src/routes/artistRoutes');
 const AWS = require('aws-sdk');
 const dotenv = require('dotenv');
 
@@ -29,6 +30,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/music', musicRoutes);
+app.use('/artist', artistRoutes);
 
 app.get('/', (req, res) => {
     res.send('Bienvenue sur notre application Spotify-like!');
