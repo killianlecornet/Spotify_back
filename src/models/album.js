@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const albumSchema = new mongoose.Schema({
     title: String,
-    artist: String,
+    artist: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Artist'
+    },
     releaseDate: Date,
     imageUrl: String, // URL de l'image sur S3
     description: String

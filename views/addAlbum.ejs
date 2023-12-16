@@ -1,3 +1,4 @@
+<!-- addAlbum.ejs -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +9,15 @@
     <h1>Ajouter un nouvel album</h1>
     <form action="/album/upload" method="post" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Titre de l'album" required>
-        <input type="text" name="artist" placeholder="Nom de l'artiste" required>
+        
+        <!-- Ajoutez un champ select pour choisir l'artiste -->
+        <select name="artist" required>
+            <!-- Vous devrez remplir dynamiquement cette liste avec les artistes existants -->
+            <% artists.forEach(artist => { %>
+                <option value="<%= artist._id %>"><%= artist.name %></option>
+            <% }); %>
+        </select>
+        
         <input type="date" name="releaseDate" required>
         <input type="file" name="image" required> <!-- Image de l'album -->
         <textarea name="description" placeholder="Description de l'album" required></textarea>

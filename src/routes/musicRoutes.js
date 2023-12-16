@@ -3,12 +3,18 @@ const multer = require('multer');
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const Music = require('../models/music');
+const Artist = require('../models/artist');
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-router.get('/add', (req, res) => {
-    res.render('addMusic');
+router.get('/add', async (req, res) => {
+    try {
+        const artists = await Artist.find(); // Récupérer la liste des artistes depuis la base de données
+        res.render('addMusic', { artists });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 router.post('/upload', upload.fields([
@@ -48,7 +54,7 @@ router.post('/upload', upload.fields([
             artist,
             genre,
             url: audioUrl,
-            imageUrl: imageUrl
+            imageUrl
         });
 
         await newMusic.save();

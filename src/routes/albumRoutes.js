@@ -1,14 +1,21 @@
+// albumRoutes.js
 const express = require('express');
 const multer = require('multer');
 const AWS = require('aws-sdk');
 const fs = require('fs');
-const Album = require('../models/album'); // Assurez-vous que le chemin est correct
+const Album = require('../models/album');
+const Artist = require('../models/artist');
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-router.get('/add', (req, res) => {
-    res.render('addAlbum');
+router.get('/add', async (req, res) => {
+    try {
+        const artists = await Artist.find();
+        res.render('addAlbum', { artists });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 router.post('/upload', upload.single('image'), async (req, res) => {
@@ -37,9 +44,15 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     try {
         const imageUrl = await uploadToS3(imageFile, 'albumImages');
 
+        // Récupérez l'ID de l'artiste à partir du nom de l'artiste
+        const artistObject = await Artist.findById(artist);
+        if (!artistObject) {
+            return res.status(400).send(`Artiste non trouvé pour l'ID : ${artist}`);
+        }
+
         const newAlbum = new Album({
             title,
-            artist,
+            artist: artistObject._id, // Utilisez l'ID de l'artiste
             releaseDate,
             imageUrl,
             description
@@ -47,6 +60,8 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
         await newAlbum.save();
         res.send('Album ajouté avec succès.');
+
+
     } catch (error) {
         res.status(500).send(error.message);
     }
