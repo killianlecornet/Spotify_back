@@ -3,16 +3,24 @@ const multer = require('multer');
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const Artist = require('../models/artist');
+const Album = require('../models/album');
+const Music = require('../models/music');
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-router.get('/add', (req, res) => {
-    res.render('addArtist');
+router.get('/add', async (req, res) => {
+    try {
+        const albums = await Album.find();
+        const musics = await Music.find();
+        res.render('addArtist', { albums, musics });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 router.post('/upload', upload.single('image'), async (req, res) => {
-    const { name, description } = req.body;
+    const { name, description, albums, musics } = req.body;
     const imageFile = req.file;
 
     const s3 = new AWS.S3();
@@ -40,7 +48,9 @@ router.post('/upload', upload.single('image'), async (req, res) => {
         const newArtist = new Artist({
             name,
             imageUrl,
-            description
+            description,
+            albums: albums ? albums.split(',') : [], // Convertissez la chaîne séparée par des virgules en tableau
+            musics: musics ? musics.split(',') : [] // Convertissez la chaîne séparée par des virgules en tableau
         });
 
         await newArtist.save();
