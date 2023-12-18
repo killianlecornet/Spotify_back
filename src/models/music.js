@@ -6,9 +6,13 @@ const musicSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist'
     },
+    album: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Album'
+    },
     genre: String,
-    url: String, // URL du fichier audio sur S3
-    imageUrl: String // URL de l'image sur S3
+    url: String,
+    imageUrl: String
 });
 
 module.exports = mongoose.model('Music', musicSchema);

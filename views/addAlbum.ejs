@@ -18,6 +18,15 @@
             <% }); %>
         </select>
         
+        <!-- Ajoutez un champ select pour choisir les musiques -->
+        <select name="musics" multiple required>
+            <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
+            <% musics.forEach(music => { %>
+                <option value="<%= music._id %>"><%= music.title %></option>
+            <% }); %>
+        </select>
+        
+        
         <input type="date" name="releaseDate" required>
         <input type="file" name="image" required> <!-- Image de l'album -->
         <textarea name="description" placeholder="Description de l'album" required></textarea>
