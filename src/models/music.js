@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 
 const musicSchema = new mongoose.Schema({
     title: String,
-    artist: {
+    artist: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist'
-    },
-    album: {
+    }],
+    album: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Album'
-    },
+    }],
     genre: String,
     url: String,
     imageUrl: String

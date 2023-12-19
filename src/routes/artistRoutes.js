@@ -3,11 +3,16 @@ const multer = require('multer');
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const Artist = require('../models/artist');
-const Album = require('../models/album');
 const Music = require('../models/music');
+const Album = require('../models/album');
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
+
+// router.get('/add', (req, res) => {
+//     res.render('addArtist', { albums, musics });
+// });
+
 
 router.get('/add', async (req, res) => {
     try {
@@ -44,13 +49,20 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
     try {
         const imageUrl = await uploadToS3(imageFile, 'artistImages');
+        
+        const albumObject = await Album.findById(albums);
+        if (!albumObject) {
+            return res.status(400).send(`mudicu non trouvé pour l'ID : ${albums}`);
+        }
+
+        const musicObjects = await Music.find({ _id: { $in: musics } });
 
         const newArtist = new Artist({
             name,
             imageUrl,
             description,
-            albums: albums ? albums.split(',') : [], // Convertissez la chaîne séparée par des virgules en tableau
-            musics: musics ? musics.split(',') : [] // Convertissez la chaîne séparée par des virgules en tableau
+            albums: [albumObject._id],
+            music: musicObjects.map(music => music._id)
         });
 
         await newArtist.save();

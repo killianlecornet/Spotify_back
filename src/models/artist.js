@@ -1,4 +1,3 @@
-// artist.js (ou le fichier où vous avez défini le modèle)
 const mongoose = require('mongoose');
 
 const artistSchema = new mongoose.Schema({
@@ -9,7 +8,7 @@ const artistSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Album'
     }],
-    musics: [{
+    music: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Music'
     }]

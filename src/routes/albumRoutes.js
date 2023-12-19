@@ -20,12 +20,9 @@ router.get('/add', async (req, res) => {
     }
 });
 
-// routes/albumRoutes.js
 router.post('/upload', upload.single('image'), async (req, res) => {
     const { title, artist, releaseDate, description, musics } = req.body;
     const imageFile = req.file;
-
-    console.log('Album Upload Request:', req.body);
 
     const s3 = new AWS.S3();
 

@@ -10,30 +10,21 @@
         <input type="text" name="name" placeholder="Nom de l'artiste" required>
         <textarea name="description" placeholder="Description de l'artiste" required></textarea>
         <input type="file" name="image" required> <!-- Image -->
-
-        <!-- Ajoutez des champs pour choisir les albums et les musiques -->
-        <label for="albums">Albums :</label>
-        <select name="albums" multiple>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les albums existants -->
-            <% if (albums.length > 0) { %>
-                <% albums.forEach(album => { %>
-                    <option value="<%= album._id %>"><%= album.title %></option>
-                <% }); %>
-            <% } else { %>
-                <option disabled selected>Pas d'album trouver</option>
-            <% } %>
+        
+        <!-- Ajoutez un champ select pour choisir les musiques -->
+        <select name="albums" multiple required>
+            <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
+            <% albums.forEach(album => { %>
+                <option value="<%= album._id %>"><%= album.title %></option>
+            <% }); %>
         </select>
 
-        <label for="musics">Musiques :</label>
-        <select name="musics" multiple>
+        <!-- Ajoutez un champ select pour choisir les musiques -->
+        <select name="musics" multiple required>
             <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
-            <% if (musics.length > 0) { %>
-                <% musics.forEach(music => { %>
-                    <option value="<%= music._id %>"><%= music.title %></option>
-                <% }); %>
-            <% } else { %>
-                <option disabled selected>Pas de musique trouver</option>
-            <% } %>
+            <% musics.forEach(music => { %>
+                <option value="<%= music._id %>"><%= music.title %></option>
+            <% }); %>
         </select>
 
         <button type="submit">Uploader</button>

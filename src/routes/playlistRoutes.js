@@ -24,8 +24,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     const { title, artist, description, musics } = req.body;
     const imageFile = req.file;
 
-    console.log('Playlist Upload Request:', req.body);
-
     const s3 = new AWS.S3();
 
     const uploadToS3 = (file, keyPrefix) => {
