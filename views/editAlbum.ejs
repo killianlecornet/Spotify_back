@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Éditer l'Album</title>
+</head>
+<body>
+    <h1>Éditer l'Album</h1>
+    <form action="/album/update/<%= album._id %>" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="title">Titre de l'album:</label>
+            <input type="text" id="title" name="title" value="<%= album.title %>" required>
+        </div>
+
+        <div>
+            <label for="artist">Artiste:</label>
+            <select id="artist" name="artist" required>
+                <% artists.forEach(artist => { %>
+                    <option value="<%= artist._id %>" <%= album.artist && album.artist._id.equals(artist._id) ? 'selected' : '' %>><%= artist.name %></option>
+                <% }); %>
+            </select>
+        </div>
+
+        <div>
+            <label for="releaseDate">Date de sortie:</label>
+            <input type="date" id="releaseDate" name="releaseDate" value="<%= album.releaseDate.toISOString().split('T')[0] %>" required>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= album.description %></textarea>
+        </div>
+
+        <div>
+            <label for="music">Musiques:</label>
+            <select id="music" name="music" multiple required>
+                <% musics.forEach(music => { %>
+                    <option value="<%= music._id %>" <%= album.music.some(m => m.equals(music._id)) ? 'selected' : '' %>><%= music.title %></option>
+                <% }); %>
+            </select>
+        </div>
+
+        <div>
+            <label for="image">Image de l'album:</label>
+            <input type="file" id="image" name="image">
+        </div>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>

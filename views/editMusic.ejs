@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Éditer la Musique</title>
+</head>
+<body>
+    <h1>Éditer la Musique</h1>
+    <form action="/music/update/<%= music._id %>" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" value="<%= music.title %>" required>
+
+        <select name="artist" required>
+            <% artists.forEach(artist => { %>
+                <option value="<%= artist._id %>" <%= music.artist && music.artist._id && music.artist._id.equals(artist._id) ? 'selected' : '' %>><%= artist.name %></option>
+            <% }); %>
+        </select>
+
+        <input type="text" name="genre" value="<%= music.genre %>" required>
+        <!-- Autres champs... -->
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>

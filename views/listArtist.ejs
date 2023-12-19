@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Artistes</title>
+</head>
+<body>
+    <h1>Liste des Artistes</h1>
+
+    <!-- Formulaire de recherche -->
+    <form action="/artist" method="get">
+        <input type="text" name="query" placeholder="Rechercher des artistes..." value="<%= query || '' %>">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Affichage des artistes -->
+    <ul>
+        <% artists.forEach(artist => { %>
+            <li>
+                <%= artist.name %>
+                <a href="/artist/edit/<%= artist._id %>">Éditer</a>
+                <form action="/artist/delete/<%= artist._id %>" method="post">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

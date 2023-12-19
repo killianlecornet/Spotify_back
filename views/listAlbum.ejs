@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Albums</title>
+</head>
+<body>
+    <h1>Liste des Albums</h1>
+
+    <!-- Formulaire de recherche -->
+    <form action="/album" method="get">
+        <input type="text" name="query" placeholder="Rechercher des albums..." value="<%= query || '' %>">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Affichage des albums -->
+    <ul>
+        <% albums.forEach(album => { %>
+            <li>
+                <%= album.title %> - <%= album.name %>
+                <a href="/album/edit/<%= album._id %>">Éditer</a>
+                <form action="/album/delete/<%= album._id %>" method="post">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

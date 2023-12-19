@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Morceaux</title>
+</head>
+<body>
+    <h1>Liste des Morceaux</h1>
+
+    <!-- Formulaire de recherche -->
+    <form action="/music" method="get">
+        <input type="text" name="query" placeholder="Rechercher des morceaux..." value="<%= query || '' %>">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Affichage des musiques -->
+    <ul>
+        <% musics.forEach(music => { %>
+            <li>
+                <%= music.title %> - <%= music.artist ? music.artist.name : 'Artiste inconnu' %>
+                <a href="/music/edit/<%= music._id %>">Éditer</a>
+                <form action="/music/delete/<%= music._id %>" method="POST">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        <% }); %>        
+    </ul>
+</body>
+</html>

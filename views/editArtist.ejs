@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Éditer l'Artiste</title>
+</head>
+<body>
+    <h1>Éditer l'Artiste</h1>
+    <form action="/artist/update/<%= artist._id %>" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" value="<%= artist.name %>" required>
+        <textarea name="description" required><%= artist.description %></textarea>
+        <input type="file" name="image">
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>
