@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/list/style.css">
     <title>Liste des Artistes</title>
 </head>
 <body>
@@ -16,11 +17,15 @@
     <ul>
         <% artists.forEach(artist => { %>
             <li>
-                <%= artist.name %>
-                <a href="/artist/edit/<%= artist._id %>">Éditer</a>
-                <form action="/artist/delete/<%= artist._id %>" method="post">
-                    <button type="submit">Supprimer</button>
-                </form>
+                <div class="album-info">
+                    <%= artist.name %>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-edit" href="/artist/edit/<%= artist._id %>">Éditer</a>
+                    <form action="/artist/delete/<%= artist._id %>" method="post">
+                        <button class="btn btn-delete" type="submit">Supprimer</button>
+                    </form>
+                </div>
             </li>
         <% }); %>
     </ul>

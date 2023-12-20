@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un artiste</title>
+    <link rel="stylesheet" href="/css/edit/style.css">
 </head>
 <body>
-    <h1>Ajouter un nouvel artiste</h1>
-    <form action="/artist/upload" method="post" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Nom de l'artiste" required>
-        <textarea name="description" placeholder="Description de l'artiste" required></textarea>
-        <input type="file" name="image" required> <!-- Image -->
-        
-        <!-- Ajoutez un champ select pour choisir les musiques -->
-        <select name="albums" multiple required>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
-            <% albums.forEach(album => { %>
-                <option value="<%= album._id %>"><%= album.title %></option>
-            <% }); %>
-        </select>
+    <div class="container">
+        <h1>Ajouter un nouvel artiste</h1>
+        <form action="/artist/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Nom de l'artiste:</label>
+                <input type="text" id="name" name="name" placeholder="Nom de l'artiste" required>
+            </div>
 
-        <!-- Ajoutez un champ select pour choisir les musiques -->
-        <select name="musics" multiple required>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
-            <% musics.forEach(music => { %>
-                <option value="<%= music._id %>"><%= music.title %></option>
-            <% }); %>
-        </select>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" placeholder="Description de l'artiste" required></textarea>
+            </div>
 
-        <button type="submit">Uploader</button>
-    </form>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" required>
+            </div>
+
+            <!-- Les champs selects pour albums et musiques -->
+
+            <button type="submit" class="btn-submit">Ajouter</button>
+        </form>
+    </div>
 </body>
 </html>

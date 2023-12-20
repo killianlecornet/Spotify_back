@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    color: #1db954;
+}
+
+input[type="text"] {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: #1db954;
+    color: white;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #1ed760;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #282828;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+li .album-info {
+    flex-grow: 1;
+}
+
+.btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    background-color: #1db954;
+    transition: background-color 0.3s;
+    width: 90px; /* Taille uniforme des boutons */
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #1ed760;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-edit, .btn-delete {
+    margin-left: 5px;
+}
+
+
+
+/* Adapter la mise en page pour les petits écrans */
+@media (max-width: 768px) {
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    li .album-info {
+        margin-bottom: 10px;
+    }
+
+    .btn-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

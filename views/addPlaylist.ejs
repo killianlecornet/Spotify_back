@@ -1,34 +1,49 @@
-<!-- addPlaylist.ejs -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Ajouter une playlist</title>
+    <link rel="stylesheet" href="/css/edit/style.css">
 </head>
 <body>
-    <h1>Ajouter une nouvelle playlist</h1>
-    <form action="/playlist/upload" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Titre de la playlist" required>
-        
-        <!-- Ajoutez un champ select pour choisir l'artiste -->
-        <select name="artist" required>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les artistes existants -->
-            <% artists.forEach(artist => { %>
-                <option value="<%= artist._id %>"><%= artist.name %></option>
-            <% }); %>
-        </select>
-        
-        <!-- Ajoutez un champ select pour choisir les musiques -->
-        <select name="musics" multiple required>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les musiques existantes -->
-            <% musics.forEach(music => { %>
-                <option value="<%= music._id %>"><%= music.title %></option>
-            <% }); %>
-        </select>
-        
-        <input type="file" name="image" required> <!-- Image de la playlist -->
-        <textarea name="description" placeholder="Description de la playlist" required></textarea>
-        <button type="submit">Ajouter</button>
-    </form>
+    <div class="container">
+        <h1>Ajouter une nouvelle playlist</h1>
+        <form action="/playlist/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Titre de la playlist:</label>
+                <input type="text" id="title" name="title" placeholder="Titre de la playlist" required>
+            </div>
+
+            <div class="form-group">
+                <label for="artist">Artiste:</label>
+                <select id="artist" name="artist" required>
+                    <% artists.forEach(artist => { %>
+                        <option value="<%= artist._id %>"><%= artist.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="musics">Musiques:</label>
+                <select id="musics" name="musics" multiple required>
+                    <% musics.forEach(music => { %>
+                        <option value="<%= music._id %>"><%= music.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image de la playlist:</label>
+                <input type="file" id="image" name="image" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description de la playlist:</label>
+                <textarea id="description" name="description" placeholder="Description de la playlist" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Ajouter</button>
+        </form>
+    </div>
 </body>
 </html>

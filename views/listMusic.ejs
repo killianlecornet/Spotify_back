@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/list/style.css">
     <meta charset="UTF-8">
     <title>Liste des Morceaux</title>
 </head>
@@ -17,11 +18,15 @@
     <ul>
         <% musics.forEach(music => { %>
             <li>
-                <%= music.title %> - <%= music.artist ? music.artist.name : 'Artiste inconnu' %>
-                <a href="/music/edit/<%= music._id %>">Éditer</a>
-                <form action="/music/delete/<%= music._id %>" method="POST">
-                    <button type="submit">Supprimer</button>
-                </form>
+                <div class="album-info">
+                    <%= music.title %> - <%= music.artist ? music.artist.name : 'Artiste inconnu' %>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-edit" href="/music/edit/<%= music._id %>">Éditer</a>
+                    <form action="/music/delete/<%= music._id %>" method="POST">
+                        <button class="btn btn-delete" type="submit">Supprimer</button>
+                    </form>
+                </div>
             </li>
         <% }); %>        
     </ul>

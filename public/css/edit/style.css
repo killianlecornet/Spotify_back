@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    background-color: #282828;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%; /* Assure que tous les éléments s'étendent sur toute la largeur */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
+}
+
+.btn-submit {
+    background-color: #1ed760;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Assure que le bouton s'étend sur toute la largeur */
+}
+
+.btn-submit:hover {
+    background-color: #1db954;
+}

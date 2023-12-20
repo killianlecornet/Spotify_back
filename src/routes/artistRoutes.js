@@ -90,6 +90,25 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const artist = await Artist.findById(req.params.id)
+      .populate({
+        path: 'albums', // Peuple le champ 'albums' avec les détails des albums
+        populate: { path: 'music' }, // Peuple aussi le champ 'music' dans chaque album
+      })
+      .populate('music'); // Peuple le champ 'music' directement lié à l'artiste
+
+    if (!artist) {
+      return res.status(404).send('Artiste non trouvé');
+    }
+
+    res.json(artist);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 router.post('/delete/:id', async (req, res) => {
   try {
     await Artist.findByIdAndDelete(req.params.id);

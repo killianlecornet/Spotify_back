@@ -1,34 +1,54 @@
-<!-- addMusic.ejs -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Ajouter de la musique</title>
+    <link rel="stylesheet" href="/css/edit/style.css">
 </head>
 <body>
-    <h1>Ajouter une nouvelle musique</h1>
-    <form action="/music/upload" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Titre de la musique" required>
-        
-        <!-- Modifiez le champ artiste pour être un menu déroulant (select) -->
-        <select name="artist" required>
-            <% artists.forEach(artist => { %>
-                <option value="<%= artist._id %>"><%= artist.name %></option>
-            <% }); %>
-        </select>
+    <div class="container">
+        <h1>Ajouter une nouvelle musique</h1>
+        <form action="/music/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">Titre de la musique:</label>
+                <input type="text" id="title" name="title" placeholder="Titre de la musique" required>
+            </div>
 
-        <!-- Ajoutez un champ album pour choisir l'album -->
-        <select name="album" required>
-            <!-- Vous devrez remplir dynamiquement cette liste avec les albums existants -->
-            <% albums.forEach(album => { %>
-                <option value="<%= album._id %>"><%= album.title %></option>
-            <% }); %>
-        </select>
-        
-        <input type="text" name="genre" placeholder="Genre" required>
-        <input type="file" name="file" required> <!-- Fichier audio -->
-        <input type="file" name="image" required> <!-- Image -->
-        <button type="submit">Uploader</button>
-    </form>
+            <div class="form-group">
+                <label for="artist">Artiste:</label>
+                <select id="artist" name="artist" required>
+                    <% artists.forEach(artist => { %>
+                        <option value="<%= artist._id %>"><%= artist.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" placeholder="Genre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="file">Fichier audio:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" required>
+            </div>
+
+            <div class="form-group">
+                <label for="album">Album:</label>
+                <select id="album" name="album" required>
+                    <% albums.forEach(album => { %>
+                        <option value="<%= album._id %>"><%= album.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Ajouter</button>
+        </form>
+    </div>
 </body>
 </html>
