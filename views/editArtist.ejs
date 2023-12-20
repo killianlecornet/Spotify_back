@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
     <title>Éditer l'Artiste</title>
     <link rel="stylesheet" href="/css/edit/style.css"> <!-- Assurez-vous que le chemin est correct -->
 </head>
@@ -21,6 +22,27 @@
             <div class="form-group">
                 <label for="image">Image de l'artiste:</label>
                 <input type="file" id="image" name="image">
+            </div>
+
+            <input type="hidden" name="existingAlbums" value="<%= artist.albums.map(a => a._id).join(',') %>">
+            <input type="hidden" name="existingMusics" value="<%= artist.music.map(m => m._id).join(',') %>">
+
+            <div class="form-group">
+                <label for="albums">Albums de l'artiste:</label>
+                <select id="albums" name="albums" multiple>
+                    <% albums.forEach(album => { %>
+                        <option value="<%= album._id %>" <%= artist.albums.includes(album._id.toString()) ? 'selected' : '' %>><%= album.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="musics">Musiques de l'artiste:</label>
+                <select id="musics" name="musics" multiple>
+                    <% musics.forEach(music => { %>
+                        <option value="<%= music._id %>" <%= artist.music.includes(music._id.toString()) ? 'selected' : '' %>><%= music.title %></option>
+                    <% }); %>
+                </select>
             </div>
 
             <button type="submit" class="btn-submit">Mettre à jour</button>

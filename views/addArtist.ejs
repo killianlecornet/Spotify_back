@@ -24,7 +24,23 @@
                 <input type="file" id="image" name="image" required>
             </div>
 
-            <!-- Les champs selects pour albums et musiques -->
+            <div class="form-group">
+                <label for="albums">Albums:</label>
+                <select id="albums" name="albums" multiple required>
+                    <% albums.forEach(album => { %>
+                        <option value="<%= album._id %>"><%= album.title %></option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="musics">Musiques:</label>
+                <select id="musics" name="musics" multiple required>
+                    <% musics.forEach(music => { %>
+                        <option value="<%= music._id %>"><%= music.title %></option>
+                    <% }); %>
+                </select>
+            </div>
 
             <button type="submit" class="btn-submit">Ajouter</button>
         </form>
