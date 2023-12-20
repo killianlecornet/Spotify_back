@@ -34,13 +34,14 @@ router.get('/', async (req, res) => {
 
 router.get('/add', async (req, res) => {
   try {
-    const albums = await Album.find();
-    const musics = await Music.find();
-    res.render('addArtist', { albums, musics });
+      const albums = await Album.find();
+      const musics = await Music.find();
+      res.render('addArtist', { albums, musics });
   } catch (error) {
-    res.status(500).send(error.message);
+      res.status(500).send(error.message);
   }
 });
+
 
 router.post('/upload', upload.single('image'), async (req, res) => {
   const { name, description, albums, musics } = req.body;
@@ -122,17 +123,19 @@ router.post('/delete/:id', async (req, res) => {
 
 router.get('/edit/:id', async (req, res) => {
   try {
-    const artist = await Artist.findById(req.params.id);
-    res.render('editArtist', { artist });
+      const artist = await Artist.findById(req.params.id);
+      const albums = await Album.find();
+      const musics = await Music.find();
+      res.render('editArtist', { artist, albums, musics });
   } catch (error) {
-    res
-      .status(500)
-      .send("Erreur lors de la récupération de l'artiste: " + error.message);
+      res.status(500).send("Erreur lors de la récupération de l'artiste: " + error.message);
   }
 });
 
+
 router.post('/update/:id', upload.single('image'), async (req, res) => {
-  const { name, description } = req.body;
+  const artistId = req.params.id;
+  const { name, description, albums, musics, existingAlbums, existingMusics } = req.body;
 
   try {
     const updateData = {
