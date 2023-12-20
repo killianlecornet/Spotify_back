@@ -50,7 +50,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   const uploadToS3 = (file, keyPrefix) => {
     return new Promise((resolve, reject) => {
       const uploadParams = {
-        Bucket: 'spotify95',
+        Bucket: 'spotify98',
         Key: `${keyPrefix}/${file.originalname}`,
         Body: fs.createReadStream(file.path),
       };

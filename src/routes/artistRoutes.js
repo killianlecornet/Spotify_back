@@ -9,10 +9,6 @@ const Album = require('../models/album');
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
-// router.get('/add', (req, res) => {
-//     res.render('addArtist', { albums, musics });
-// });
-
 router.get('/', async (req, res) => {
   try {
     let filter = {};
@@ -51,7 +47,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   const uploadToS3 = (file, keyPrefix) => {
     return new Promise((resolve, reject) => {
       const uploadParams = {
-        Bucket: 'spotify95',
+        Bucket: 'spotify98',
         Key: `${keyPrefix}/${file.originalname}`,
         Body: fs.createReadStream(file.path),
       };
@@ -73,7 +69,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
       return res.status(400).send(`mudicu non trouvé pour l'ID : ${albums}`);
     }
 
-    const musicObjects = await Music.find({ _id: { $in: musics } });
+    const musicObjects = await Music.findById(musics);
 
     const newArtist = new Artist({
       name,
@@ -85,25 +81,6 @@ router.post('/upload', upload.single('image'), async (req, res) => {
 
     await newArtist.save();
     res.send('Artiste ajouté avec succès.');
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
-
-router.get('/:id', async (req, res) => {
-  try {
-    const artist = await Artist.findById(req.params.id)
-      .populate({
-        path: 'albums', // Peuple le champ 'albums' avec les détails des albums
-        populate: { path: 'music' }, // Peuple aussi le champ 'music' dans chaque album
-      })
-      .populate('music'); // Peuple le champ 'music' directement lié à l'artiste
-
-    if (!artist) {
-      return res.status(404).send('Artiste non trouvé');
-    }
-
-    res.json(artist);
   } catch (error) {
     res.status(500).send(error.message);
   }
